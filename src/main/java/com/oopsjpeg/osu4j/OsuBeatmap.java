@@ -44,37 +44,37 @@ public class OsuBeatmap extends OsuElement {
 
 	public OsuBeatmap(Osu api, JsonObject obj) {
 		super(api);
-		if (obj.has("approved")) approved = ApprovalState.fromID(obj.get("approved").getAsInt());
-		if (obj.has("approved_date")) approvedDate = obj.get("approved_date").isJsonNull() ? null : Utility.parseDate(obj.get("approved_date").getAsString());
-		if (obj.has("last_update")) lastUpdate = Utility.parseDate(obj.get("last_update").getAsString());
-	    if (obj.has("artist")) artist = obj.get("artist").getAsString();
-	    if (obj.has("beatmap_id")) beatmapID = obj.get("beatmap_id").getAsInt();
-	    if (obj.has("beatmapset_id")) beatmapSetID = obj.get("beatmapset_id").getAsInt();
-	    if (obj.has("bpm")) bpm = obj.get("bpm").getAsFloat();
-	    if (obj.has("creator")) creatorName = obj.get("creator").getAsString();
-	    if (obj.has("difficultyrating")) difficultyrating = obj.get("difficultyrating").getAsFloat();
-	    if (obj.has("diff_size")) diffSize = obj.get("diff_size").getAsFloat();
-	    if (obj.has("diff_overall")) diffOverall = obj.get("diff_overall").getAsFloat();
-	    if (obj.has("diff_approach")) diffApproach = obj.get("diff_approach").getAsFloat();
-	    if (obj.has("diff_drain")) diffDrain = obj.get("diff_drain").getAsFloat();
-	    if (obj.has("hit_length")) hitLength = obj.get("hit_length").getAsInt();
-	    if (obj.has("source")) source = obj.get("source").getAsString();
-	    if (obj.has("genre_id")) genre = Genre.fromID(obj.get("genre_id").getAsInt());
-	    if (obj.has("language_id")) language = Language.fromID(obj.get("language_id").getAsInt());
-	    if (obj.has("title")) title = obj.get("title").getAsString();
-	    if (obj.has("total_length")) totalLength = obj.get("total_length").getAsInt();
-	    if (obj.has("version")) version = obj.get("version").getAsString();
-	    if (obj.has("file_md5")) fileMD5 = obj.get("file_md5").getAsString();
-	    if (obj.has("mode")) mode = GameMode.fromID(obj.get("mode").getAsInt());
-	    if (obj.has("tags")) tags = obj.get("tags").getAsString().split(" ");
-	    if (obj.has("favourite_count")) favouriteCount = obj.get("favourite_count").getAsInt();
-	    if (obj.has("playcount")) playcount = obj.get("playcount").getAsInt();
-	    if (obj.has("passcount")) passcount = obj.get("passcount").getAsInt();
-	    if (obj.has("max_combo")) maxCombo = obj.get("max_combo").getAsInt();
+		approved = ApprovalState.fromID(obj.get("approved").getAsInt());
+		approvedDate = obj.get("approved_date").isJsonNull() ? null : Utility.parseDate(obj.get("approved_date").getAsString());
+		lastUpdate = Utility.parseDate(obj.get("last_update").getAsString());
+	    artist = obj.get("artist").getAsString();
+	    beatmapID = obj.get("beatmap_id").getAsInt();
+	    beatmapSetID = obj.get("beatmapset_id").getAsInt();
+	    bpm = obj.get("bpm").getAsFloat();
+	    creatorName = obj.get("creator").getAsString();
+	    difficultyrating = obj.get("difficultyrating").getAsFloat();
+	    diffSize = obj.get("diff_size").getAsFloat();
+	    diffOverall = obj.get("diff_overall").getAsFloat();
+	    diffApproach = obj.get("diff_approach").getAsFloat();
+	    diffDrain = obj.get("diff_drain").getAsFloat();
+	    hitLength = obj.get("hit_length").getAsInt();
+	    source = obj.get("source").getAsString();
+	    genre = Genre.fromID(obj.get("genre_id").getAsInt());
+	    language = Language.fromID(obj.get("language_id").getAsInt());
+	    title = obj.get("title").getAsString();
+	    totalLength = obj.get("total_length").getAsInt();
+	    version = obj.get("version").getAsString();
+	    fileMD5 = obj.get("file_md5").getAsString();
+	    mode = GameMode.fromID(obj.get("mode").getAsInt());
+	    tags = obj.get("tags").getAsString().split(" ");
+	    favouriteCount = obj.get("favourite_count").getAsInt();
+	    playcount = obj.get("playcount").getAsInt();
+	    passcount = obj.get("passcount").getAsInt();
+	    if (obj.has("max_combo") && !obj.get("max_combo").isJsonNull()) maxCombo = obj.get("max_combo").getAsInt();
 
-		if (beatmapID != -1) beatmapSet = getAPI().beatmapSets.getAsQuery(new EndpointBeatmapSet.Arguments(beatmapSetID))
+		beatmapSet = getAPI().beatmapSets.getAsQuery(new EndpointBeatmapSet.Arguments(beatmapSetID))
 				.asLazilyLoaded();
-		if (creatorName != null) creator = getAPI().users.getAsQuery(new EndpointUsers.ArgumentsBuilder(creatorName).build())
+		creator = getAPI().users.getAsQuery(new EndpointUsers.ArgumentsBuilder(creatorName).build())
 				.asLazilyLoaded();
 	}
 
